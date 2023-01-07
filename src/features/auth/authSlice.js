@@ -8,7 +8,7 @@ const initialState = {
 }
 
 
-export const getUser = createAsyncThunk("auth/getUser", async (email) => {
+export const logIn = createAsyncThunk("auth/logIn", async (email) => {
     const res = await fetch(`https://elite-recruiting-server.vercel.app/user/${email}`)
     const data = await res.json()
     if (data.status) return data
@@ -30,14 +30,14 @@ const authSlice = createSlice({
         builder
 
             /* Sign Up Thunk */
-            .addCase(getUser.pending, (state) => {
+            .addCase(logIn.pending, (state) => {
                 state.isLoading = true
                 state.isError = false
                 state.error = ''
-            }).addCase(getUser.fulfilled, (state, action) => {
+            }).addCase(logIn.fulfilled, (state, action) => {
                 state.isLoading = false
                 state.user.email = action.payload
-            }).addCase(getUser.rejected, (state, { error }) => {
+            }).addCase(logIn.rejected, (state, { error }) => {
                 state.user.email = ''
                 state.isError = true
                 state.isLoading = false

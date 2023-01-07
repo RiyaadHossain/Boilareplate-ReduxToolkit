@@ -1,20 +1,18 @@
 import { apiSlice } from "../api/apiSlice";
 
-const jobSlice = apiSlice.injectEndpoints({
+const productSlice = apiSlice.injectEndpoints({
     endpoints: (build) => ({
-        addJob: build.mutation({
+        addProduct: build.mutation({
             query: (data) => ({
-                url: '/job',
+                url: '/product',
                 method: 'POST',
                 body: data
-            }),
-            invalidatesTags: ["Jobs"]
+            })
         }),
-        getJobs: build.query({
-            query: () => "/jobs",
-            providesTags: ["Jobs"]
+        getProducts: build.query({
+            query: () => "/products"
         }),
     })
 })
 
-export const { useAddJobMutation, useGetJobsQuery } = jobSlice
+export const { useAddProductMutation, useGetJobsQuery } = productSlice
